@@ -2,15 +2,15 @@
 1. Estándares Generales de Java
 Clases: nombradas en PascalCase
 Métodos: nombrados en camelCase
-'''
+``` java
 public class InactivarOfertaService {
     private final OfertaRepository ofertaRepository;
 
     public InactivarOfertaService(OfertaRepository ofertaRepository) {
         this.ofertaRepository = ofertaRepository;
     }
-...
-'''
+
+```
 Variables: en camelCase con nombres descriptivos (ofertaRepository, createdAt, empresaTipoId).
 Encapsulamiento: uso adecuado de private para atributos y public para métodos públicos.
 JavaBeans: uso de get, set, e is para acceso a atributos.
@@ -25,3 +25,59 @@ JavaBeans: uso de get, set, e is para acceso a atributos.
     Rutas limpias
 
 3. Things: Se hace uso clases y objetos, se encapsula datos.
+
+# Uso de SonarLint para clase Oferta.
+
+```java
+public Oferta(UUID id, String titulo, String descripcion, String area,
+                  Double sueldo, LocalDateTime fecha, LocalDateTime createdAt,
+                  LocalDateTime updatedAt, Boolean activa, Empresa empresa) {
+        this.id = id;
+```
+Uso de patron de diseño buillder
+
+```java
+public static class Builder {
+    private UUID id;
+    private String titulo;
+    private String descripcion;
+    private String area;
+    private Double sueldo;
+    private LocalDateTime fecha;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private Boolean activa;
+    private Empresa empresa;
+```
+
+#CLEAN CODE
+1. Nombre
+``` java
+public class InactivarOfertaService {
+    private final OfertaRepository ofertaRepository;
+```
+2. Funcion y estructura de codigo
+```java
+public Builder descripcion(String descripcion) {
+    this.descripcion = descripcion;
+    return this;
+    }
+```
+3. Objeto y estructura de datos
+```java
+public class Oferta {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "id", nullable = false, updatable = false)
+    private UUID id;
+
+    @Column(name = "titulo", nullable = false, length = 100)
+    private String titulo;
+
+    @Column(name = "descripcion", columnDefinition = "TEXT")
+    private String descripcion;
+
+```
+
+#
