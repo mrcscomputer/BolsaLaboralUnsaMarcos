@@ -50,7 +50,7 @@ public static class Builder {
     private Empresa empresa;
 ```
 
-#CLEAN CODE
+# CLEAN CODE
 1. Nombre
 ``` java
 public class InactivarOfertaService {
@@ -80,9 +80,9 @@ public class Oferta {
 
 ```
 
-#PRINCIPIOS SOLID 
+# PRINCIPIOS SOLID 
 
-1. Responsabilidad Única: Cada clase del controlador tiene una única responsabilidad: manejar las solicitudes HTTP y delegar la lógica.
+1. Responsabilidad Única: Cada clase del controlador maneja las solicitudes y delegar la lógica
 ```java
 private final RegistrarOfertaService registrarOfertaService;
 private final EditarOfertaService editarOfertaService;
@@ -94,14 +94,14 @@ private final EditarOfertaService editarOfertaService;
     }
 ```
 
-2. Abierto-Cerrado: Se puede extender la funcionalidad mediante nuevos servicios sin modificar el controlador.
+2. Abierto-Cerrado: Se puede ampliar funciones mediante nuevos servicios sin la necesidad de modificar el controlador.
 ```java
 public OfertaController(
     RegistrarOfertaService registrarOfertaService,
     EditarOfertaService editarOfertaService,
 ```
 
-3. Inversión de Dependencias: El controlador depende de servicios inyectados (abstracciones), no de implementaciones concretas.
+3. Inversión de Dependencias: El controlador depende de servicios
 
 ```java
 private final RegistrarOfertaService registrarOfertaService;
