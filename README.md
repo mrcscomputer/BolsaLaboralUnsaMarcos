@@ -80,4 +80,34 @@ public class Oferta {
 
 ```
 
-#
+#PRINCIPIOS SOLID 
+
+1. Responsabilidad Única: Cada clase del controlador tiene una única responsabilidad: manejar las solicitudes HTTP y delegar la lógica.
+```java
+private final RegistrarOfertaService registrarOfertaService;
+private final EditarOfertaService editarOfertaService;
+...
+@PostMapping
+    public ResponseEntity<Oferta> registrar(@RequestBody Oferta oferta) {
+        Oferta registrada = registrarOfertaService.ejecutar(oferta);
+        return ResponseEntity.ok(registrada);
+    }
+```
+
+2. Abierto-Cerrado: Se puede extender la funcionalidad mediante nuevos servicios sin modificar el controlador.
+```java
+public OfertaController(
+    RegistrarOfertaService registrarOfertaService,
+    EditarOfertaService editarOfertaService,
+```
+
+3. Inversión de Dependencias: El controlador depende de servicios inyectados (abstracciones), no de implementaciones concretas.
+
+```java
+private final RegistrarOfertaService registrarOfertaService;
+
+public OfertaController(RegistrarOfertaService registrarOfertaService, ...) {
+    this.registrarOfertaService = registrarOfertaService;
+}
+
+```
